@@ -22,6 +22,12 @@ export default function Home() {
           <span className={styles.label}>Savings</span>
           <strong className={styles.value}>R {kpis.savingsRand}</strong>
         </div>
+        <div className={styles.card}>
+          <span className={styles.label}>Sites online</span>
+          <strong className={styles.value}>
+            {sites.filter((s) => s.status === "online").length} / {sites.length}
+          </strong>
+        </div>
       </section>
 
       <section className={styles.card}>
