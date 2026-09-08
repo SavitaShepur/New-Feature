@@ -6,7 +6,7 @@ export default function Home() {
     <main className={styles.page}>
       <header className={styles.header}>
         <h1 className={styles.title}>Beam Demo</h1>
-        <span className={styles.subtitle}>Portfolio overview</span>
+        <span className={styles.subtitle}>Portfolio overview (smoke test)</span>
       </header>
 
       <section className={styles.kpis}>
