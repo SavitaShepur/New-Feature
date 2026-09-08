@@ -1,13 +1,26 @@
 import { kpis, sites } from "@/lib/sites";
 import styles from "./dashboard.module.css";
 
+// Render on every request so "Last updated" shows the current date rather than
+// the date the site was last deployed.
+export const dynamic = "force-dynamic";
+
+const dateFormatter = new Intl.DateTimeFormat("en-ZA", {
+  dateStyle: "long",
+  timeZone: "Africa/Johannesburg",
+});
+
 export default function Home() {
+  const lastUpdated = dateFormatter.format(new Date());
+
   return (
     <main className={styles.page}>
       <header className={styles.header}>
         <h1 className={styles.title}>Beam Demo</h1>
         <span className={styles.subtitle}>Portfolio overview</span>
       </header>
+
+      <p className={styles.lastUpdated}>Last updated {lastUpdated}</p>
 
       <section className={styles.kpis}>
         <div className={styles.card}>
@@ -20,7 +33,9 @@ export default function Home() {
         </div>
         <div className={styles.card}>
           <span className={styles.label}>Savings</span>
-          <strong className={styles.value}>R {kpis.savingsRand}</strong>
+          <strong className={`${styles.value} ${styles.valuePositive}`}>
+            R {kpis.savingsRand}
+          </strong>
         </div>
         <div className={styles.card}>
           <span className={styles.label}>Sites online</span>
