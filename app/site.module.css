@@ -1,0 +1,61 @@
+.page { max-width: 960px; margin: 0 auto; padding: 40px 20px 0; }
+
+.hero { padding: 32px 0 40px; }
+.eyebrow {
+  display: inline-block;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.heroTitle { margin: 0 0 16px; font-size: 40px; line-height: 1.15; letter-spacing: -0.5px; }
+.heroText { margin: 0 0 28px; max-width: 60ch; font-size: 17px; line-height: 1.6; color: var(--muted); }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.buttonPrimary,
+.buttonSecondary {
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.buttonPrimary { background: var(--accent); color: #ffffff; }
+.buttonPrimary:hover { background: var(--accent-dark); }
+.buttonSecondary { background: var(--card); color: var(--text); border-color: var(--border); }
+.buttonSecondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.section { padding: 40px 0; border-top: 1px solid var(--border); }
+.sectionTitle { margin: 0 0 8px; font-size: 24px; letter-spacing: -0.3px; }
+.sectionLead { margin: 0 0 28px; max-width: 60ch; color: var(--muted); line-height: 1.6; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+.cardTitle { margin: 0 0 8px; font-size: 16px; }
+.cardText { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+.stat { display: block; font-size: 28px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+.statLabel { color: var(--muted); font-size: 13px; }
+
+.steps { margin: 0; padding: 0 0 0 20px; color: var(--muted); line-height: 1.8; max-width: 62ch; }
+.steps li { padding-left: 4px; }
+.steps strong { color: var(--text); }
+
+.prose { max-width: 62ch; color: var(--muted); line-height: 1.7; }
+.prose p { margin: 0 0 16px; }
+.prose strong { color: var(--text); }
+
+.contactRow { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; margin-bottom: 12px; }
+.contactLabel { min-width: 96px; color: var(--muted); font-size: 14px; }
+.contactValue { color: var(--text); font-size: 15px; }
+.contactLink { color: var(--accent); font-weight: 600; text-decoration: none; }
+.contactLink:hover { text-decoration: underline; }
