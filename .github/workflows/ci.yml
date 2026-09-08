@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run build
+
+  automerge:
+    # Runs alongside `checks`. It only arms auto-merge; GitHub performs the merge
+    # once the required `checks` job is green (branch protection on main).
+    if: >-
+      github.event_name == 'pull_request' &&
+      (startsWith(github.head_ref, 'claude/') || contains(github.event.pull_request.labels.*.name, 'automerge'))
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PR: ${{ github.event.pull_request.number }}
+    steps:
+      - name: Hold PRs that touch protected files
+        id: guard
+        run: |
+          files=$(gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json files -q '.files[].path')
+          echo "$files"
+          if echo "$files" | grep -Eq '^(\.github/|CLAUDE\.md$|package\.json$|package-lock\.json$)'; then
+            echo "held=true" >> "$GITHUB_OUTPUT"
+            gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body "Auto-merge skipped: this PR touches protected files (.github, CLAUDE.md or package files). A human needs to review and merge it."
+          else
+            echo "held=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Arm auto-merge
+        if: steps.guard.outputs.held == 'false'
+        run: |
+          gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --auto --squash --delete-branch \
+            || gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --squash --delete-branch
