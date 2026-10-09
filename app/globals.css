@@ -3,9 +3,11 @@
   --card: #ffffff;
   --text: #16202a;
   --muted: #5b6b7b;
-  --accent: #0f766e;
-  --accent-dark: #0b5c56;
-  --accent-soft: #d9f0ec;
+  --accent: #be185d;
+  --accent-dark: #9d174d;
+  --accent-soft: #fce7f3;
+  --ok: #0f766e;
+  --ok-soft: #d9f0ec;
   --danger: #b42318;
   --danger-soft: #fde8e6;
   --border: #e3e8ee;
